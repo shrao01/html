@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload a File</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #ddd6f3,#fff1eb,#f7938e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+        .card-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .left-sticker,
+        .right-sticker {
+            position: absolute;
+            width: 100px; 
+            z-index: 1;
+            animation: slide-in 0.5s ease-out forwards, wiggle 2s ease-in-out infinite alternate; 
+            
+        }
+
+        .left-sticker img{
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            filter: brightness(0) saturate(50%) hue-rotate(180deg);      
+            
+        }
+
+        .right-sticker img {
+            display: block;
+            width: 150%;
+            height: auto;
+            border-radius: 15px;
+            filter: brightness(0);
+            
+            
+        }
+
+        .left-sticker {
+            left: -100px; 
+            top: 0;
+            bottom: 0;
+        }
+
+        .right-sticker {
+            bottom: -20px; 
+            right: -180px; 
+        }
+
+
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 2px 6px 14px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            animation: slide-in 0.5s ease-out forwards;
+            
+        }
+
+        @keyframes slide-in {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes wiggle {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: black;
+            font-size: 2.2em;
+            text-shadow: 2px 2px #737272;
+            
+            margin-bottom: 10px;
+        }
+
+        .card input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            border: 2px dashed #999;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-family: Arial;
+            font-weight: bold;
+            font-size: 15px;
+            width: 80%;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.25s;
+        }
+
+        .card input[type="file"]:hover {
+            border-color: #111;
+            
+        }
+
+        .card input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 11px 30px;
+            border: none;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card input[type="submit"]:hover {
+            background-color: #29792d;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 15px;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="left-sticker">
+            <img src="https://static-00.iconduck.com/assets.00/speaking-head-in-silhouette-emoji-2048x1775-vxmkk0ge.png" > 
+            
+
+        </div>
+        <div class="right-sticker">
+            <img src="https://www.pngall.com/wp-content/uploads/5/Hello-PNG-File.png" alt="Right Sticker">
+           
+        </div>
+        <div class="card">
+            <h3>Upload a Video File</h3>
+            <form method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="video/*">
+                <input type="submit" value="Upload">
+            </form>
+            <p style="font-size: 15px;">Did you say: <span style="font-size:20px;text-shadow: 0.6px 0.6px #737272;">{{ transcription }}</span> </p>
+            <p><a href="{{ url_for('download', filename=file) }}" target="_blank">Go to /download?filename= to download the video file</a></p>
+        </div>
+    </div>
+</body>
+</html>
